@@ -15,6 +15,8 @@ create table customer (
 	customer_type varchar(255)
 );
 
+INSERT INTO customer (customerid, customer_address, customerdob, customer_date_created, customer_date_updated, customer_email, 
+    customer_gender, customer_name, customer_paid_amount, customer_phone, customer_sum_debt, customer_typecustomer) VALUES
 ('C001', '123 Street A', '1990-01-01', CURDATE(), '2024-11-01', 'customer1@example.com', 'Male', 'John Doe', 1000.0, '1234567890', 200.0, 'Regular'),
 ('C002', '456 Street B', '1992-02-02', CURDATE(), '2024-11-02', 'customer2@example.com', 'Female', 'Jane Smith', 1500.0, '0987654321', 100.0, 'VIP'),
 ('C003', '789 Street C', '1985-03-03', CURDATE(), '2024-11-03', 'customer3@example.com', 'Male', 'Mike Brown', 2000.0, '0123456789', 50.0, 'Regular'),

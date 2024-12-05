@@ -73,11 +73,6 @@ public class CustomerController {
 		customer.setCustomerPhone(customerDto.getCustomerPhone());
 		customer.setCustomerEmail(customerDto.getCustomerEmail());
 		customer.setCustomerDateCreated(customerDto.getCustomerDateCreated());
-		
-		LocalDate currentDate = LocalDate.now();
-	    Date sqlDate = Date.valueOf(currentDate);    
-	    customerDto.setCustomerDateUpdated(sqlDate);
-	    
 		customer.setCustomerDateUpdated(customerDto.getCustomerDateUpdated());
 		customer.setCustomerPaidAmount(customerDto.getCustomerPaidAmount());
 		customer.setCustomerSumDebt(customerDto.getCustomerSumDebt());
@@ -106,7 +101,12 @@ public class CustomerController {
 			customerDto.setCustomerPhone(customer.getCustomerPhone());
 			customerDto.setCustomerEmail(customer.getCustomerEmail());
 			customerDto.setCustomerDateCreated(customer.getCustomerDateCreated());
-			customerDto.setCustomerDateUpdated(customer.getCustomerDateUpdated());
+			
+			LocalDate currentDate = LocalDate.now();
+		    Date sqlDate = Date.valueOf(currentDate);    
+		    customerDto.setCustomerDateUpdated(sqlDate);
+			
+//			customerDto.setCustomerDateUpdated(customer.getCustomerDateUpdated());
 			customerDto.setCustomerPaidAmount(customer.getCustomerPaidAmount());
 			customerDto.setCustomerSumDebt(customer.getCustomerSumDebt());
 			customerDto.setCustomerType(customer.getCustomerType());

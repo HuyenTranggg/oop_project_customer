@@ -10,6 +10,14 @@
     <div class="container">
 		<h1 class="text-center my-4">Customers</h1>
 		
+		<!-- Thanh tìm kiếm -->
+		<form class="mb-4" method="GET" action="/customers/search">
+		    <div class="input-group">
+		        <input type="text" name="keyword" class="form-control" placeholder="Search by id, name, address, email, or phone number" />
+		        <button class="btn btn-primary" type="submit">Search</button>
+		    </div>
+		</form>
+		
 		<a class="btn btn-primary" href="/customers/create">Create Customer</a>
 		
 		<table class="table">

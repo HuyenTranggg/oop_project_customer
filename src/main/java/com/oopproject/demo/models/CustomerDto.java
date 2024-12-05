@@ -19,7 +19,7 @@ public class CustomerDto {
 	
 	@NotEmpty(message = "The Customer Email Address is required")
 	private String customerEmail;
-	
+
 	private Date customerDOB;
 	
 	private Date customerDateCreated;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Type Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Customer Type Report</h1>
+	
+	
+    <!-- Hiển thị biểu đồ và danh sách dữ liệu nếu có -->
+    <div th:unless="${isEmpty}">
+        <canvas id="customerTypeChart" width="400" height="200"></canvas>
+        
+
+        <script th:inline="javascript">
+            // Truyền dữ liệu từ model vào JavaScript (thành JSON)
+			var customerTypeStatistics = [[${customerTypeStatistics}]];
+			console.log("Customer Type Statistics:", customerTypeStatistics);
+
+            // Tách nhãn (labels) và số liệu (data) từ Map dữ liệu
+            const labels = Object.keys(customerTypeStatistics);
+            const data = Object.values(customerTypeStatistics);
+
+            // Tạo biểu đồ bằng Chart.js
+            const ctx = document.getElementById('customerTypeChart').getContext('2d');
+            const config = {
+                type: 'bar', // Biểu đồ dạng cột
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Customers',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)', // Màu cho Casual
+                            'rgba(54, 162, 235, 0.2)', // Màu cho Regular
+                            'rgba(255, 99, 132, 0.2)'  // Màu cho VIP
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Customers'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Customer Types'
+                            }
+                        }
+                    }
+                }
+            };
+
+            const customerTypeChart = new Chart(ctx, config);
+        </script>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

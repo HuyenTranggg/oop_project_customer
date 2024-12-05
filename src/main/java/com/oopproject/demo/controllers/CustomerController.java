@@ -2,7 +2,9 @@ package com.oopproject.demo.controllers;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -184,5 +186,25 @@ public class CustomerController {
 	    model.addAttribute("keyword", keyword); // Truyền từ khóa về view
 	    return "customers/SearchCustomer"; // Tên file HTML
 	}
+	
+	@GetMapping("/report")
+	public String customerReport(Model model) {
+
+	    // Thống kê theo loại khách hàng
+	    List<Object[]> customerTypeStats = repo.getCustomerTypeStatistics();
+	    
+	    
+	    Map<String, Long> customerTypeStatistics = new HashMap<>();
+	    for (Object[] stat : customerTypeStats) {
+	        customerTypeStatistics.put((String) stat[0], (Long) stat[1]);
+	    }
+	    
+	    System.out.println("Customer Type Statistics: " + customerTypeStatistics);
+	    
+	    model.addAttribute("customerTypeStatistics", customerTypeStatistics);
+
+	    return "customers/CustomerTypeReport";
+	}
+
 		
 }

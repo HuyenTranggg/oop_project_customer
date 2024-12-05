@@ -1,5 +1,7 @@
 package com.oopproject.demo.controllers;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,12 @@ public class CustomerController {
 	@GetMapping("/create")
 	public String showCreatePage(Model model) {
 		CustomerDto customerDto = new CustomerDto();
+		
+		LocalDate currentDate = LocalDate.now();
+	    Date sqlDate = Date.valueOf(currentDate);
+	    customerDto.setCustomerDateCreated(sqlDate);    
+	    customerDto.setCustomerDateUpdated(sqlDate);   
+	    
 		model.addAttribute("customerDto", customerDto);
 		return "customers/CreateCustomer";
 	}
@@ -65,6 +73,11 @@ public class CustomerController {
 		customer.setCustomerPhone(customerDto.getCustomerPhone());
 		customer.setCustomerEmail(customerDto.getCustomerEmail());
 		customer.setCustomerDateCreated(customerDto.getCustomerDateCreated());
+		
+		LocalDate currentDate = LocalDate.now();
+	    Date sqlDate = Date.valueOf(currentDate);    
+	    customerDto.setCustomerDateUpdated(sqlDate);
+	    
 		customer.setCustomerDateUpdated(customerDto.getCustomerDateUpdated());
 		customer.setCustomerPaidAmount(customerDto.getCustomerPaidAmount());
 		customer.setCustomerSumDebt(customerDto.getCustomerSumDebt());

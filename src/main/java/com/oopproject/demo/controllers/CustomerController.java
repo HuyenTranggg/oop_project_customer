@@ -176,5 +176,13 @@ public class CustomerController {
 		
 		return "redirect:/customers";
 	}	
+	
+	@GetMapping("/search")
+	public String searchCustomers(@RequestParam("keyword") String keyword, Model model) {
+	    List<Customer> customers = repo.findByKeyword(keyword);
+	    model.addAttribute("customers", customers);
+	    model.addAttribute("keyword", keyword); // Truyền từ khóa về view
+	    return "customers/SearchCustomer"; // Tên file HTML
+	}
 		
 }

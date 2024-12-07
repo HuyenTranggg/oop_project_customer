@@ -2,9 +2,12 @@ package com.oopproject.demo.controllers;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
+//import java.util.ArrayList;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -186,7 +189,8 @@ public class CustomerController {
 	    model.addAttribute("keyword", keyword); // Truyền từ khóa về view
 	    return "customers/SearchCustomer"; // Tên file HTML
 	}
-	
+
+/*	
 	@GetMapping("/report")
 	public String customerReport(Model model) {
 
@@ -205,6 +209,58 @@ public class CustomerController {
 
 	    return "customers/CustomerTypeReport";
 	}
+*/
+/*	
+	@GetMapping("/reportpage")
+    public String viewReportPage(Model model) {
+        return "customers/ReportPage";
+	}
+*/	
+	@GetMapping("/report")
+	public String viewCustomerReport(
+	        @RequestParam(value = "statType", required = false, defaultValue = "") String statType,
+	        Model model) {
+	    
+	    List<Object[]> chartData;
+	    switch (statType) {
+	        case "ageGroup":
+	            chartData = repo.findStatisticsByAgeGroup();
+	            break;
+	        case "customerType":
+	            chartData = repo.findStatisticsByCustomerType();
+	            break;
+	        case "customerAddress":
+	            chartData = repo.findStatisticsByLocation();
+	            break;
+	        case "totalSpending":
+	            chartData = repo.findStatisticsByTotalSpending();
+	            break;
+	        case "customerDebt":
+	            chartData = repo.findStatisticsByDebt();
+	            break;
+	        case "newCustomer":
+	            chartData = repo.findStatisticsByNewCustomers();
+	            break;
+	        default:
+	            chartData = null; // Trả về danh sách rỗng
+	            break;
+	    }
+	    
+	    model.addAttribute("chartData", chartData);
+	    model.addAttribute("statType", statType);
+	    return "customers/ReportCustomer";
+	}
 
-		
+/*	
+
+	@GetMapping("/reports")
+	public String viewCustomerReport(
+	        
+	        Model model) {
+	    System.out.println("Accessed /report with statType: ");
+	    
+	    
+	    return "customers/CustomerReport";
+	}
+	*/
 }
